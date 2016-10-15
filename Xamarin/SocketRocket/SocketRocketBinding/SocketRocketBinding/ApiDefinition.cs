@@ -121,8 +121,8 @@ namespace SocketRocketBinding
 	}
 
 	// @protocol SRWebSocketDelegate <NSObject>
-	[Protocol, Model]
 	[BaseType(typeof(NSObject))]
+	[Model]
 	interface SRWebSocketDelegate
 	{
 		// @required -(void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message;
@@ -185,17 +185,17 @@ namespace SocketRocketBinding
 		NSRunLoop SR_networkRunLoop { get; }
 	}
 
-	[Static]
-	//	[Verify(ConstantsInterfaceAssociation)]
-	partial interface Constants
-	{
-		// extern double SocketRocketVersionNumber;
-		[Field("SocketRocketVersionNumber", "__Internal")]
-		double SocketRocketVersionNumber { get; }
+	//[Static]
+	////	[Verify(ConstantsInterfaceAssociation)]
+	//partial interface Constants
+	//{
+	//	// extern double SocketRocketVersionNumber;
+	//	[Field("SocketRocketVersionNumber", "__Internal")]
+	//	double SocketRocketVersionNumber { get; }
 
-		// extern const unsigned char [] SocketRocketVersionString;
-		[Field("SocketRocketVersionString", "__Internal")]
-		IntPtr SocketRocketVersionString { get; }
-	}
+	//	// extern const unsigned char [] SocketRocketVersionString;
+	//	//[Field("SocketRocketVersionString", "__Internal")]
+	//	//IntPtr SocketRocketVersionString { get; }
+	//}
 
 }

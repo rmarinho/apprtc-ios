@@ -43,3 +43,6 @@ Xamarin/SocketRocket/StaticLib/libSocketRocket-i386.a
 Xamarin/SocketRocket/StaticLib/libSocketRocket.a
 Xamarin/SocketRocket/SocketRocketBinding/SocketRocketBinding/bin
 Xamarin/SocketRocket/SocketRocketBinding/SocketRocketBinding/obj
+*.userprefs
+Xamarin/SocketRocket/SocketRocketBinding/SocketRocketBinding/SocketRocket.App/bin
+Xamarin/SocketRocket/SocketRocketBinding/SocketRocketBinding/SocketRocket.App/obj
