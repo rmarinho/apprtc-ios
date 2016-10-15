@@ -2,9 +2,6 @@
 using Foundation;
 using ObjCRuntime;
 using CoreFoundation;
-using CFNetwork;
-using SocketRocket;
-
 
 namespace SocketRocketBinding
 {

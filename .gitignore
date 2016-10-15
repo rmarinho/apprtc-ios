@@ -36,3 +36,7 @@ xcuserdata
 #*.lock
 Xamarin/SocketRocket/Pods/sharpie-build/ModuleCache
 Xamarin/libjingle_peerconnection/Pods/sharpie-build/ModuleCache
+Xamarin/SocketRocket/StaticLib/libSocketRocket-arm64.a
+Xamarin/SocketRocket/StaticLib/libSocketRocket-armv7.a
+Xamarin/SocketRocket/StaticLib/libSocketRocket-i386.a
+Xamarin/SocketRocket/StaticLib/libSocketRocket.a

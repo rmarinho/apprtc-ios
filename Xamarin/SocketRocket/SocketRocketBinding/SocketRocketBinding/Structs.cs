@@ -3,7 +3,7 @@
 namespace SocketRocketBinding
 {
 
-[Native]
+	[Native]
 public enum SRReadyState : nint
 {
 	Connecting = 0,
