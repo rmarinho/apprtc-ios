@@ -1,0 +1,5 @@
+/Users/rmarinho/apprtc-ios/static/AppRTCBinding/obj/Debug/Xamarin.iOS,Version=v1.0.AssemblyAttribute.cs
+/Users/rmarinho/apprtc-ios/static/AppRTCBinding/bin/Debug/AppRTCBinding.dll.mdb
+/Users/rmarinho/apprtc-ios/static/AppRTCBinding/bin/Debug/AppRTCBinding.dll
+/Users/rmarinho/apprtc-ios/static/AppRTCBinding/obj/Debug/AppRTCBinding.dll
+/Users/rmarinho/apprtc-ios/static/AppRTCBinding/obj/Debug/AppRTCBinding.dll.mdb

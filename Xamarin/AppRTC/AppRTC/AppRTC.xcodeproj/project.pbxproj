@@ -29,11 +29,6 @@
 		33EB7F441DB2B9AF006B0563 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EB7F431DB2B9AF006B0563 /* CoreGraphics.framework */; };
 		33EB7F461DB2B9D1006B0563 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EB7F451DB2B9D1006B0563 /* QuartzCore.framework */; };
 		33EB7F481DB2B9DD006B0563 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EB7F471DB2B9DD006B0563 /* AVFoundation.framework */; };
-		33EB7F4C1DB2BC17006B0563 /* libWebRTC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EB7F4B1DB2BC17006B0563 /* libWebRTC.a */; };
-		33EB7F4E1DB2BC92006B0563 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EB7F4D1DB2BC92006B0563 /* libicucore.tbd */; };
-		33EB7F501DB2BCA2006B0563 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EB7F4F1DB2BCA2006B0563 /* libsqlite3.tbd */; };
-		33EB7F521DB2BCAE006B0563 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EB7F511DB2BCAE006B0563 /* libc++.tbd */; };
-		33EB7F541DB2BCDB006B0563 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EB7F531DB2BCDB006B0563 /* libstdc++.6.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,7 +66,6 @@
 		33EB7F1E1DB2B480006B0563 /* RTCSessionDescription+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCSessionDescription+JSON.h"; sourceTree = "<group>"; };
 		33EB7F1F1DB2B480006B0563 /* RTCSessionDescription+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCSessionDescription+JSON.m"; sourceTree = "<group>"; };
 		33EB7F2A1DB2B4C6006B0563 /* ExtraLibs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ExtraLibs; sourceTree = "<group>"; };
-		33EB7F2C1DB2B603006B0563 /* libWebRTC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWebRTC.a; path = ExtraLibs/libjingle_peerconnection/libWebRTC.a; sourceTree = "<group>"; };
 		33EB7F2E1DB2B60E006B0563 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		33EB7F301DB2B731006B0563 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		33EB7F311DB2B731006B0563 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
@@ -87,10 +81,6 @@
 		33EB7F451DB2B9D1006B0563 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		33EB7F471DB2B9DD006B0563 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		33EB7F4B1DB2BC17006B0563 /* libWebRTC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWebRTC.a; sourceTree = "<group>"; };
-		33EB7F4D1DB2BC92006B0563 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
-		33EB7F4F1DB2BCA2006B0563 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		33EB7F511DB2BCAE006B0563 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		33EB7F531DB2BCDB006B0563 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,10 +88,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33EB7F541DB2BCDB006B0563 /* libstdc++.6.tbd in Frameworks */,
-				33EB7F521DB2BCAE006B0563 /* libc++.tbd in Frameworks */,
-				33EB7F501DB2BCA2006B0563 /* libsqlite3.tbd in Frameworks */,
-				33EB7F4E1DB2BC92006B0563 /* libicucore.tbd in Frameworks */,
 				33EB7F481DB2B9DD006B0563 /* AVFoundation.framework in Frameworks */,
 				33EB7F461DB2B9D1006B0563 /* QuartzCore.framework in Frameworks */,
 				33EB7F441DB2B9AF006B0563 /* CoreGraphics.framework in Frameworks */,
@@ -113,7 +99,6 @@
 				33EB7F361DB2B7D5006B0563 /* UIKit.framework in Frameworks */,
 				33EB7F341DB2B7CB006B0563 /* Security.framework in Frameworks */,
 				33EB7F2F1DB2B60E006B0563 /* Foundation.framework in Frameworks */,
-				33EB7F4C1DB2BC17006B0563 /* libWebRTC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,10 +156,6 @@
 		33EB7F2B1DB2B602006B0563 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				33EB7F531DB2BCDB006B0563 /* libstdc++.6.tbd */,
-				33EB7F511DB2BCAE006B0563 /* libc++.tbd */,
-				33EB7F4F1DB2BCA2006B0563 /* libsqlite3.tbd */,
-				33EB7F4D1DB2BC92006B0563 /* libicucore.tbd */,
 				33EB7F471DB2B9DD006B0563 /* AVFoundation.framework */,
 				33EB7F451DB2B9D1006B0563 /* QuartzCore.framework */,
 				33EB7F431DB2B9AF006B0563 /* CoreGraphics.framework */,
@@ -187,7 +168,6 @@
 				33EB7F351DB2B7D5006B0563 /* UIKit.framework */,
 				33EB7F331DB2B7CB006B0563 /* Security.framework */,
 				33EB7F2E1DB2B60E006B0563 /* Foundation.framework */,
-				33EB7F2C1DB2B603006B0563 /* libWebRTC.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -359,12 +339,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = C9D4426WFH;
+				ENABLE_BITCODE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ExtraLibs/libjingle_peerconnection",
 					"$(PROJECT_DIR)/AppRTC",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-c++",
+					"-icucore",
+					"-sqlite3",
+					"-stdc++.6\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ExtraLibs/**";
@@ -375,12 +362,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = C9D4426WFH;
+				ENABLE_BITCODE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ExtraLibs/libjingle_peerconnection",
 					"$(PROJECT_DIR)/AppRTC",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-c++",
+					"-icucore",
+					"-sqlite3",
+					"-stdc++.6\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ExtraLibs/**";
