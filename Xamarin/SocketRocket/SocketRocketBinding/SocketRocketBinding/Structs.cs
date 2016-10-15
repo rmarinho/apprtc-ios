@@ -1,10 +1,11 @@
 ﻿using System;
+using ObjCRuntime;
+
 
 namespace SocketRocketBinding
 {
-
-	[Native]
-public enum SRReadyState : nint
+[Native]
+public enum SRReadyState : long
 {
 	Connecting = 0,
 	Open = 1,
@@ -13,7 +14,7 @@ public enum SRReadyState : nint
 }
 
 [Native]
-public enum SRStatusCode : nint
+public enum SRStatusCode : int
 {
 	CodeNormal = 1000,
 	CodeGoingAway = 1001,

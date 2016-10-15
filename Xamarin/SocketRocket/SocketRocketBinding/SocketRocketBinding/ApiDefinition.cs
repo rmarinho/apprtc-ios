@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Runtime.InteropServices;
+//using CFNetwork;
+
+using CoreFoundation;
 using Foundation;
 using ObjCRuntime;
-using CoreFoundation;
 
 namespace SocketRocketBinding
 {
 
-	[Static]
-	[Verify(ConstantsInterfaceAssociation)]
+	//	[Static]
+	//	[Verify(ConstantsInterfaceAssociation)]
 	partial interface Constants
 	{
 		// extern NSString *const SRWebSocketErrorDomain;
@@ -39,12 +42,13 @@ namespace SocketRocketBinding
 		NSUrl Url { get; }
 
 		// @property (readonly, nonatomic) CFHTTPMessageRef receivedHTTPHeaders;
-		[Export("receivedHTTPHeaders")]
-		unsafe CFHTTPMessageRef* ReceivedHTTPHeaders { get; }
+		//[Export("receivedHTTPHeaders")]
+		//[DllImport ("/System/Library/Frameworks/CFNetwork.framework/CFNetwork")]
+		//unsafe CFHTTPMessageRef* ReceivedHTTPHeaders { get; }
 
 		// @property (readwrite, nonatomic) NSArray * requestCookies;
 		[Export("requestCookies", ArgumentSemantic.Assign)]
-		[Verify(StronglyTypedNSArray)]
+		//[Verify(StronglyTypedNSArray)]
 		NSObject[] RequestCookies { get; set; }
 
 		// @property (readonly, copy, nonatomic) NSString * protocol;
@@ -53,12 +57,12 @@ namespace SocketRocketBinding
 
 		// -(id)initWithURLRequest:(NSURLRequest *)request protocols:(NSArray *)protocols allowsUntrustedSSLCertificates:(BOOL)allowsUntrustedSSLCertificates;
 		[Export("initWithURLRequest:protocols:allowsUntrustedSSLCertificates:")]
-		[Verify(StronglyTypedNSArray)]
+		//[Verify(StronglyTypedNSArray)]
 		IntPtr Constructor(NSUrlRequest request, NSObject[] protocols, bool allowsUntrustedSSLCertificates);
 
 		// -(id)initWithURLRequest:(NSURLRequest *)request protocols:(NSArray *)protocols;
 		[Export("initWithURLRequest:protocols:")]
-		[Verify(StronglyTypedNSArray)]
+		//[Verify(StronglyTypedNSArray)]
 		IntPtr Constructor(NSUrlRequest request, NSObject[] protocols);
 
 		// -(id)initWithURLRequest:(NSURLRequest *)request;
@@ -67,12 +71,12 @@ namespace SocketRocketBinding
 
 		// -(id)initWithURL:(NSURL *)url protocols:(NSArray *)protocols allowsUntrustedSSLCertificates:(BOOL)allowsUntrustedSSLCertificates;
 		[Export("initWithURL:protocols:allowsUntrustedSSLCertificates:")]
-		[Verify(StronglyTypedNSArray)]
+		//[Verify(StronglyTypedNSArray)]
 		IntPtr Constructor(NSUrl url, NSObject[] protocols, bool allowsUntrustedSSLCertificates);
 
 		// -(id)initWithURL:(NSURL *)url protocols:(NSArray *)protocols;
 		[Export("initWithURL:protocols:")]
-		[Verify(StronglyTypedNSArray)]
+		//[Verify(StronglyTypedNSArray)]
 		IntPtr Constructor(NSUrl url, NSObject[] protocols);
 
 		// -(id)initWithURL:(NSURL *)url;
@@ -148,26 +152,26 @@ namespace SocketRocketBinding
 	}
 
 	// @interface SRCertificateAdditions (NSURLRequest)
-	[Category]
-	[BaseType(typeof(NSUrlRequest))]
-	interface NSURLRequest_SRCertificateAdditions
-	{
-		// @property (readonly, retain, nonatomic) NSArray * SR_SSLPinnedCertificates;
-		[Export("SR_SSLPinnedCertificates", ArgumentSemantic.Retain)]
-		[Verify(StronglyTypedNSArray)]
-		NSObject[] SR_SSLPinnedCertificates { get; }
-	}
+	//[Category]
+	//[BaseType(typeof(NSUrlRequest))]
+	//interface NSURLRequest_SRCertificateAdditions
+	//{
+	//	// @property (readonly, retain, nonatomic) NSArray * SR_SSLPinnedCertificates;
+	//	[Export("SR_SSLPinnedCertificates", ArgumentSemantic.Retain)]
+	//	//	[Verify(StronglyTypedNSArray)]
+	//	NSObject[] SR_SSLPinnedCertificates { get; }
+	//}
 
-	// @interface SRCertificateAdditions (NSMutableURLRequest)
-	[Category]
-	[BaseType(typeof(NSMutableUrlRequest))]
-	interface NSMutableURLRequest_SRCertificateAdditions
-	{
-		// @property (retain, nonatomic) NSArray * SR_SSLPinnedCertificates;
-		[Export("SR_SSLPinnedCertificates", ArgumentSemantic.Retain)]
-		[Verify(StronglyTypedNSArray)]
-		NSObject[] SR_SSLPinnedCertificates { get; set; }
-	}
+	//// @interface SRCertificateAdditions (NSMutableURLRequest)
+	//[Category]
+	//[BaseType(typeof(NSMutableUrlRequest))]
+	//interface NSMutableURLRequest_SRCertificateAdditions
+	//{
+	//	// @property (retain, nonatomic) NSArray * SR_SSLPinnedCertificates;
+	//	[Export("SR_SSLPinnedCertificates", ArgumentSemantic.Retain)]
+	//	//[Verify(StronglyTypedNSArray)]
+	//	NSObject[] SR_SSLPinnedCertificates { get; set; }
+	//}
 
 	// @interface SRWebSocket (NSRunLoop)
 	[Category]
@@ -177,12 +181,12 @@ namespace SocketRocketBinding
 		// +(NSRunLoop *)SR_networkRunLoop;
 		[Static]
 		[Export("SR_networkRunLoop")]
-		[Verify(MethodToProperty)]
+		//	[Verify(MethodToProperty)]
 		NSRunLoop SR_networkRunLoop { get; }
 	}
 
 	[Static]
-	[Verify(ConstantsInterfaceAssociation)]
+	//	[Verify(ConstantsInterfaceAssociation)]
 	partial interface Constants
 	{
 		// extern double SocketRocketVersionNumber;
@@ -191,7 +195,7 @@ namespace SocketRocketBinding
 
 		// extern const unsigned char [] SocketRocketVersionString;
 		[Field("SocketRocketVersionString", "__Internal")]
-		byte[] SocketRocketVersionString { get; }
+		IntPtr SocketRocketVersionString { get; }
 	}
 
 }
