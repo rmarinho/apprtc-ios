@@ -34,3 +34,5 @@ xcuserdata
 # Misc
 .DS_Store
 #*.lock
+Xamarin/SocketRocket/Pods/sharpie-build/ModuleCache
+Xamarin/libjingle_peerconnection/Pods/sharpie-build/ModuleCache
