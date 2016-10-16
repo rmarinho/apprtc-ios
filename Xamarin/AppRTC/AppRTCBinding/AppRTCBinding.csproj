@@ -45,6 +45,10 @@
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>
+    <NativeReference Include="..\AppRTC\ExtraLibs\libjingle_peerconnection\libWebRTC.a">
+      <Kind>Static</Kind>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>

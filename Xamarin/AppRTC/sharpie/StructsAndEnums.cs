@@ -115,3 +115,42 @@ public enum SRStatusCode : nint
 	CodePolicyViolated = 1008,
 	CodeMessageTooBig = 1009
 }
+
+[Native]
+public enum RTCIceTransportsType : nint
+{
+	None,
+	Relay,
+	NoHost,
+	All
+}
+
+[Native]
+public enum RTCBundlePolicy : nint
+{
+	Balanced,
+	MaxBundle,
+	MaxCompat
+}
+
+[Native]
+public enum RTCRtcpMuxPolicy : nint
+{
+	Negotiate,
+	Require
+}
+
+[Native]
+public enum RTCTcpCandidatePolicy : nint
+{
+	Enabled,
+	Disabled
+}
+
+public enum RTCDataChannelState : uint
+{
+	Connecting,
+	Open,
+	Closing,
+	Closed
+}

@@ -120,4 +120,13 @@ public enum SRStatusCode : long
 	CodePolicyViolated = 1008,
 	CodeMessageTooBig = 1009
 }
+
+public enum RTCDataChannelState : uint
+{
+	Connecting,
+	Open,
+	Closing,
+	Closed
+}
+
 }
