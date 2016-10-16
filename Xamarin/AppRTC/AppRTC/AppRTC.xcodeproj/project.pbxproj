@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		339FA01A1DB2DC4D00535AB9 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 339FA0191DB2DC4D00535AB9 /* GLKit.framework */; };
+		33A4C7A31DB439E100E0CD9E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A4C7A21DB439E100E0CD9E /* AudioToolbox.framework */; };
+		33A4C7A41DB439E800E0CD9E /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EB7F3F1DB2B98D006B0563 /* VideoToolbox.framework */; };
 		33EB7F201DB2B480006B0563 /* ARDAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EB7F0C1DB2B480006B0563 /* ARDAppClient.m */; };
 		33EB7F211DB2B480006B0563 /* ARDMessageResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EB7F0F1DB2B480006B0563 /* ARDMessageResponse.m */; };
 		33EB7F221DB2B480006B0563 /* ARDRegisterResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EB7F111DB2B480006B0563 /* ARDRegisterResponse.m */; };
@@ -44,6 +47,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		339FA0191DB2DC4D00535AB9 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		33A4C7A01DB435A700E0CD9E /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		33A4C7A21DB439E100E0CD9E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		33A4C7A51DB43ADE00E0CD9E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		33EB7F001DB2B441006B0563 /* libAppRTC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAppRTC.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		33EB7F0C1DB2B480006B0563 /* ARDAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDAppClient.m; sourceTree = "<group>"; };
 		33EB7F0D1DB2B480006B0563 /* ARDAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDAppClient.h; sourceTree = "<group>"; };
@@ -80,7 +87,6 @@
 		33EB7F431DB2B9AF006B0563 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		33EB7F451DB2B9D1006B0563 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		33EB7F471DB2B9DD006B0563 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		33EB7F4B1DB2BC17006B0563 /* libWebRTC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWebRTC.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,16 +94,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33A4C7A41DB439E800E0CD9E /* VideoToolbox.framework in Frameworks */,
+				33A4C7A31DB439E100E0CD9E /* AudioToolbox.framework in Frameworks */,
 				33EB7F481DB2B9DD006B0563 /* AVFoundation.framework in Frameworks */,
-				33EB7F461DB2B9D1006B0563 /* QuartzCore.framework in Frameworks */,
+				33EB7F3A1DB2B854006B0563 /* CFNetwork.framework in Frameworks */,
+				33EB7F3E1DB2B985006B0563 /* CoreAudio.framework in Frameworks */,
 				33EB7F441DB2B9AF006B0563 /* CoreGraphics.framework in Frameworks */,
 				33EB7F421DB2B9A9006B0563 /* CoreMedia.framework in Frameworks */,
-				33EB7F3E1DB2B985006B0563 /* CoreAudio.framework in Frameworks */,
 				33EB7F3C1DB2B97E006B0563 /* CoreVideo.framework in Frameworks */,
-				33EB7F3A1DB2B854006B0563 /* CFNetwork.framework in Frameworks */,
+				339FA01A1DB2DC4D00535AB9 /* GLKit.framework in Frameworks */,
 				33EB7F381DB2B7DF006B0563 /* OpenGLES.framework in Frameworks */,
-				33EB7F361DB2B7D5006B0563 /* UIKit.framework in Frameworks */,
+				33EB7F461DB2B9D1006B0563 /* QuartzCore.framework in Frameworks */,
 				33EB7F341DB2B7CB006B0563 /* Security.framework in Frameworks */,
+				33EB7F361DB2B7D5006B0563 /* UIKit.framework in Frameworks */,
 				33EB7F2F1DB2B60E006B0563 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,7 +135,6 @@
 		33EB7F021DB2B441006B0563 /* AppRTC */ = {
 			isa = PBXGroup;
 			children = (
-				33EB7F4B1DB2BC17006B0563 /* libWebRTC.a */,
 				33EB7F301DB2B731006B0563 /* SRWebSocket.h */,
 				33EB7F311DB2B731006B0563 /* SRWebSocket.m */,
 				33EB7F0C1DB2B480006B0563 /* ARDAppClient.m */,
@@ -156,6 +164,10 @@
 		33EB7F2B1DB2B602006B0563 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33A4C7A51DB43ADE00E0CD9E /* libc++.tbd */,
+				33A4C7A21DB439E100E0CD9E /* AudioToolbox.framework */,
+				33A4C7A01DB435A700E0CD9E /* libicucore.tbd */,
+				339FA0191DB2DC4D00535AB9 /* GLKit.framework */,
 				33EB7F471DB2B9DD006B0563 /* AVFoundation.framework */,
 				33EB7F451DB2B9D1006B0563 /* QuartzCore.framework */,
 				33EB7F431DB2B9AF006B0563 /* CoreGraphics.framework */,
@@ -347,13 +359,16 @@
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
+					"-c",
 					"-c++",
 					"-icucore",
 					"-sqlite3",
-					"-stdc++.6\"",
+					"-stdc++",
+					"-stdc++.6",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ExtraLibs/**";
 			};
 			name = Debug;
@@ -370,13 +385,16 @@
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
+					"-c",
 					"-c++",
 					"-icucore",
 					"-sqlite3",
-					"-stdc++.6\"",
+					"-stdc++",
+					"-stdc++.6",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ExtraLibs/**";
 			};
 			name = Release;
@@ -400,6 +418,7 @@
 				33EB7F0B1DB2B441006B0563 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
