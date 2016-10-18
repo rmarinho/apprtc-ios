@@ -41,7 +41,15 @@ namespace JinglePeerconnectionBindingDemo
 
 		public override void ViewDidLoad()
 		{
-			SetupUI();
+			try
+			{
+				SetupUI();
+			}
+			catch (Exception ex)
+			{
+
+			}
+
 			isZoom = false;
 			isAudioMute = false;
 			isVideoMute = false;
