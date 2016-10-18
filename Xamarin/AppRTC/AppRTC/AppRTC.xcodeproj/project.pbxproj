@@ -48,9 +48,13 @@
 
 /* Begin PBXFileReference section */
 		339FA0191DB2DC4D00535AB9 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		33A4C7A01DB435A700E0CD9E /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		33A4C7A21DB439E100E0CD9E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		33A4C7A51DB43ADE00E0CD9E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		33A4C7A91DB4405200E0CD9E /* libc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libc.tbd; path = usr/lib/libc.tbd; sourceTree = SDKROOT; };
+		33A4C7AB1DB4408500E0CD9E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		33A4C7AD1DB4409800E0CD9E /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		33A4C7AF1DB440BE00E0CD9E /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		33A4C7B11DB440D900E0CD9E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		33A4C7B31DB440E400E0CD9E /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		33EB7F001DB2B441006B0563 /* libAppRTC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAppRTC.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		33EB7F0C1DB2B480006B0563 /* ARDAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDAppClient.m; sourceTree = "<group>"; };
 		33EB7F0D1DB2B480006B0563 /* ARDAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDAppClient.h; sourceTree = "<group>"; };
@@ -164,9 +168,13 @@
 		33EB7F2B1DB2B602006B0563 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				33A4C7A51DB43ADE00E0CD9E /* libc++.tbd */,
+				33A4C7B31DB440E400E0CD9E /* libstdc++.6.tbd */,
+				33A4C7B11DB440D900E0CD9E /* libstdc++.tbd */,
+				33A4C7AF1DB440BE00E0CD9E /* libsqlite3.tbd */,
+				33A4C7AD1DB4409800E0CD9E /* libicucore.tbd */,
+				33A4C7AB1DB4408500E0CD9E /* libc++.tbd */,
+				33A4C7A91DB4405200E0CD9E /* libc.tbd */,
 				33A4C7A21DB439E100E0CD9E /* AudioToolbox.framework */,
-				33A4C7A01DB435A700E0CD9E /* libicucore.tbd */,
 				339FA0191DB2DC4D00535AB9 /* GLKit.framework */,
 				33EB7F471DB2B9DD006B0563 /* AVFoundation.framework */,
 				33EB7F451DB2B9D1006B0563 /* QuartzCore.framework */,
@@ -302,6 +310,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;

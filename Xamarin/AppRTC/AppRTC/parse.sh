@@ -13,4 +13,5 @@ ExtraLibs/libjingle_peerconnection/Headers/RTCVideoTrack.h \
 ExtraLibs/libjingle_peerconnection/Headers/RTCVideoCapturer.h \
 ExtraLibs/libjingle_peerconnection/Headers/RTCVideoRenderer.h \
 ExtraLibs/libjingle_peerconnection/Headers/RTCI420Frame.h \
+ExtraLibs/libjingle_peerconnection/Headers/RTCEAGLVideoView.h \
 -c -IExtraLibs/libjingle_peerconnection/Headers/

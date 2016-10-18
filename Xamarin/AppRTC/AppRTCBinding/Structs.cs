@@ -34,7 +34,6 @@ public enum RTCSignalingState : uint
 	HaveRemotePrAnswer,
 	Closed
 }
-
 public enum RTCStatsOutputLevel : uint
 {
 	Standard,
@@ -128,5 +127,39 @@ public enum RTCDataChannelState : uint
 	Closing,
 	Closed
 }
+
+
+[Native]
+public enum RTCIceTransportsType : int
+{
+	None,
+	Relay,
+	NoHost,
+	All
+}
+
+[Native]
+public enum RTCBundlePolicy : int
+{
+	Balanced,
+	MaxBundle,
+	MaxCompat
+}
+
+[Native]
+public enum RTCRtcpMuxPolicy : int
+{
+	Negotiate,
+	Require
+}
+
+[Native]
+public enum RTCTcpCandidatePolicy : int
+{
+	Enabled,
+	Disabled
+}
+
+
 
 }
