@@ -43,8 +43,8 @@
   <ItemGroup>
     <NativeReference Include="..\..\Pods\libjingle_peerconnection\libjingle_peerconnection\libWebRTC.a">
       <Kind>Static</Kind>
-      <SmartLink>False</SmartLink>
-      <LinkerFlags>-l"c" -l"c++" -l"icucore" -l"sqlite3" -l"stdc++" -l"stdc++.6" </LinkerFlags>
+      <LinkerFlags>-l"stdc++"</LinkerFlags>
+      <ForceLoad>True</ForceLoad>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
