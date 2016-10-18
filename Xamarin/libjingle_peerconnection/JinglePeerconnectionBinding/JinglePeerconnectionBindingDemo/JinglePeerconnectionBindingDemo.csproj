@@ -125,7 +125,7 @@
     <Compile Include="AppRTC\ARDAppClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JinglePeerconnectionBinding.csproj">
+    <ProjectReference Include="..\JinglePeerconnectionBinding\JinglePeerconnectionBinding.csproj">
       <Project>{232A051A-9E5C-4FAD-8966-7AE89A56511B}</Project>
       <Name>JinglePeerconnectionBinding</Name>
     </ProjectReference>
