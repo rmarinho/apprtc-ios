@@ -132,9 +132,15 @@ namespace JinglePeerconnectionBindingDemo
 			buttonContainerView.Add(videoButton);
 			buttonContainerView.Add(hangupButton);
 
+			urlLabel = new UILabel();
+
+			urlLabel.Frame = new CGRect(0, 400, 200, 100);
+
 			Add(remoteView);
 			Add(localView);
 			Add(buttonContainerView);
+			Add(urlLabel);
+
 		}
 
 		internal void Disconnect()
