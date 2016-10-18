@@ -669,6 +669,9 @@ namespace JinglePeerconnectionBinding
 	[BaseType(typeof(UIView))]
 	interface RTCEAGLVideoView : RTCVideoRenderer
 	{
+		[Export("initWithFrame:")]
+		IntPtr Constructor(CGRect frame);
+
 		[Wrap("WeakDelegate")]
 		RTCEAGLVideoViewDelegate Delegate { get; set; }
 

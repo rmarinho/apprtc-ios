@@ -108,7 +108,7 @@ namespace JinglePeerconnectionBindingDemo
 
 		void SetupUI()
 		{
-			remoteView = new RTCEAGLVideoView();
+			remoteView = new RTCEAGLVideoView(new CGRect(0, 0, 200, 100));
 			localView = new RTCEAGLVideoView();
 			remoteView.Frame = new CGRect(0, 0, 200, 100);
 			localView.Frame = new CGRect(0, 100, 200, 100);
