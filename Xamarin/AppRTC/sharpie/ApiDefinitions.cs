@@ -4,6 +4,7 @@ using CoreFoundation;
 using CoreGraphics;
 using Foundation;
 using ObjCRuntime;
+using UIKit;
 
 // @protocol RTCMediaStreamTrackDelegate <NSObject>
 [Protocol, Model]
@@ -1144,4 +1145,26 @@ interface RTCI420Frame
 	[Export ("makeExclusive")]
 	[Verify (MethodToProperty)]
 	bool MakeExclusive { get; }
+}
+
+// @protocol RTCEAGLVideoViewDelegate
+[Protocol, Model]
+interface RTCEAGLVideoViewDelegate
+{
+	// @required -(void)videoView:(RTCEAGLVideoView *)videoView didChangeVideoSize:(CGSize)size;
+	[Abstract]
+	[Export ("videoView:didChangeVideoSize:")]
+	void DidChangeVideoSize (RTCEAGLVideoView videoView, CGSize size);
+}
+
+// @interface RTCEAGLVideoView : UIView <RTCVideoRenderer>
+[BaseType (typeof(UIView))]
+interface RTCEAGLVideoView : IRTCVideoRenderer
+{
+	[Wrap ("WeakDelegate")]
+	RTCEAGLVideoViewDelegate Delegate { get; set; }
+
+	// @property (nonatomic, weak) id<RTCEAGLVideoViewDelegate> delegate;
+	[NullAllowed, Export ("delegate", ArgumentSemantic.Weak)]
+	NSObject WeakDelegate { get; set; }
 }

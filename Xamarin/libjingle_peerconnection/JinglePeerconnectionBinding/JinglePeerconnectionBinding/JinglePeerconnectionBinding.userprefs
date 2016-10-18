@@ -1,12 +1,21 @@
-﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="ApiDefinition.cs">
+﻿<Properties StartupConfiguration="{88B00F05-D933-4DFB-9FEE-3AF17971EBB8}|Default">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="ApiDefinition.cs" Line="8" Column="52" />
+      <File FileName="JinglePeerconnectionBindingDemo/ARTCVideoChatViewController.cs" Line="9" Column="91" />
+      <File FileName="JinglePeerconnectionBindingDemo/AppRTC/IARDAppClient.cs" Line="15" Column="3" />
+      <File FileName="JinglePeerconnectionBindingDemo/Main.cs" Line="16" Column="1" />
+      <File FileName="ApiDefinition.cs" Line="662" Column="5" />
+      <File FileName="JinglePeerconnectionBindingDemo/AppRTC/ARDAppClient.cs" Line="12" Column="29" />
+      <File FileName="JinglePeerconnectionBindingDemo/ARTCRoomViewController.cs" Line="7" Column="82" />
+      <File FileName="JinglePeerconnectionBindingDemo/ARTCVideoChatViewController.designer.cs" Line="1" Column="1" />
+      <File FileName="JinglePeerconnectionBindingDemo/ARTCRoomTextInputViewCell.designer.cs" Line="1" Column="1" />
+      <File FileName="JinglePeerconnectionBindingDemo/ARTCRoomTextInputViewCell.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.JinglePeerconnectionBindingDemo PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.0A3BC1FF-7D05-4EFF-BEC1-84257F6FB360" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

@@ -49,3 +49,5 @@ Xamarin/SocketRocket/SocketRocketBinding/SocketRocketBinding/SocketRocket.App/ob
 Xamarin/AppRTC/AppRTCDemo/obj
 Xamarin/AppRTC/AppRTCDemo/bin
 Xamarin/AppRTC/AppRTCBinding/obj
+Xamarin/libjingle_peerconnection/JinglePeerconnectionBinding/JinglePeerconnectionBinding/JinglePeerconnectionBindingDemo/obj
+Xamarin/libjingle_peerconnection/JinglePeerconnectionBinding/JinglePeerconnectionBinding/obj
