@@ -650,7 +650,7 @@ namespace JinglePeerconnectionBinding
 
 
 	// @protocol RTCVideoRenderer <NSObject>
-	//[BaseType(typeof(NSObject))]
+	[BaseType(typeof(NSObject))]
 	[Protocol]
 	interface RTCVideoRenderer
 	{
@@ -665,11 +665,11 @@ namespace JinglePeerconnectionBinding
 		void RenderFrame(RTCI420Frame frame);
 	}
 
-	interface IRTCVideoRenderer { }
 
+	public interface IRTCVideoRenderer { }
 	// @interface RTCEAGLVideoView : UIView <RTCVideoRenderer>
 	[BaseType(typeof(UIView))]
-	interface RTCEAGLVideoView : IRTCVideoRenderer
+	interface RTCEAGLVideoView : RTCVideoRenderer
 	{
 		[Export("initWithFrame:")]
 		IntPtr Constructor(CGRect frame);
