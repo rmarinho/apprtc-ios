@@ -20,7 +20,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="225" y="-178"/>
+            <point key="canvasLocation" x="141" y="-133"/>
         </scene>
         <scene sceneID="3">
             <objects>
@@ -43,7 +43,7 @@
                                             <nil key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Text" borderStyle="roundedRect" minimumFontSize="17" id="23" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="xamarin" borderStyle="roundedRect" minimumFontSize="17" id="23" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                             <rect key="frame" x="20" y="46" width="374" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>

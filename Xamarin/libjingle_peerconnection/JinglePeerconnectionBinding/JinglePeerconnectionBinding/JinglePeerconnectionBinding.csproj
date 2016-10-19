@@ -43,7 +43,7 @@
   <ItemGroup>
     <NativeReference Include="..\..\Pods\libjingle_peerconnection\libjingle_peerconnection\libWebRTC.a">
       <Kind>Static</Kind>
-      <LinkerFlags>-l"stdc++"</LinkerFlags>
+      <LinkerFlags>-l"c" -l"c++" -l"icucore" -l"sqlite3" -l"stdc++" -l"stdc++.6"</LinkerFlags>
       <ForceLoad>True</ForceLoad>
     </NativeReference>
   </ItemGroup>

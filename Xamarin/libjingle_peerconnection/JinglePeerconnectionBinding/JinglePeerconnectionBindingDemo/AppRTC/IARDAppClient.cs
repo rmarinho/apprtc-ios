@@ -20,9 +20,10 @@ namespace JinglePeerconnectionBindingDemo
 		void SwapCameraToFront();
 		void MuteAudioIn();
 		void UnmuteAudioIn();
+		IARDAppClientDelegate ARDAppClientDelegate { get; }
 	}
 
-	public interface ARDAppClientDelegate
+	public interface IARDAppClientDelegate
 	{
 		// @required -(void)appClient:(ARDAppClient *)client didChangeState:(ARDAppClientState)state;
 		//[Abstract]

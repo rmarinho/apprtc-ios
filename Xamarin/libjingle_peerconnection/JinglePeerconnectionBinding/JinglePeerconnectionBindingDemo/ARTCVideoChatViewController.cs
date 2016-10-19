@@ -6,18 +6,19 @@ using CoreGraphics;
 
 namespace JinglePeerconnectionBindingDemo
 {
-	public partial class ARTCVideoChatViewController : UIViewController, IVideoChatController //, ARDAppClientDelegate, RTCEAGLVideoViewDelegate
+	public partial class ARTCVideoChatViewController : UIViewController, IVideoChatController, IARDAppClientDelegate //, RTCEAGLVideoViewDelegate
 	{
 		string roomUrl;
 		string roomName;
-		internal RTCVideoTrack localVideoTrack;
+
 		IARDAppClient client;
-		internal RTCVideoTrack remoteVideoTrack;
+		RTCVideoTrack localVideoTrack;
+		RTCVideoTrack remoteVideoTrack;
 		CGSize localVideoSize;
 		CGSize remoteVideoSize;
 		const string SERVER_HOST_URL = "https://apprtc.appspot.com";
-		internal RTCEAGLVideoView remoteView;
-		internal RTCEAGLVideoView localView;
+		RTCEAGLVideoView remoteView;
+		RTCEAGLVideoView localView;
 
 		UIView footerView;
 		UILabel urlLabel;
@@ -88,7 +89,7 @@ namespace JinglePeerconnectionBindingDemo
 			// //Connect to the room
 			// [self disconnect];
 			Disconnect();
-			client = new ARDAppClient();
+			client = new ARDAppClient(this);
 			client.SetServerHostUrl(SERVER_HOST_URL);
 			client.ConnectToRoomWithId(roomName);
 			urlLabel.Text = roomUrl;
@@ -108,13 +109,14 @@ namespace JinglePeerconnectionBindingDemo
 
 		void SetupUI()
 		{
-			remoteView = new RTCEAGLVideoView(new CGRect(0, 0, 200, 100));
-			localView = new RTCEAGLVideoView();
-			remoteView.Frame = new CGRect(0, 0, 200, 100);
-			localView.Frame = new CGRect(0, 100, 200, 100);
-
+			var width = View.Frame.Width;
+			int y = 0;
+			remoteView = new RTCEAGLVideoView(new CGRect(0, y, width, 100));
+			y = y + 100;
+			localView = new RTCEAGLVideoView(new CGRect(0, y, width, 100));
+			y = y + 200;
 			buttonContainerView = new UIView();
-			buttonContainerView.Frame = new CGRect(0, 300, 200, 100);
+			buttonContainerView.Frame = new CGRect(0, y, width, 100);
 
 			audioButton = UIButton.FromType(UIButtonType.RoundedRect);
 			audioButton.SetTitle("audio", UIControlState.Normal);
@@ -134,7 +136,8 @@ namespace JinglePeerconnectionBindingDemo
 
 			urlLabel = new UILabel();
 
-			urlLabel.Frame = new CGRect(0, 400, 200, 100);
+			y = y + 100;
+			urlLabel.Frame = new CGRect(0, y, width, 100);
 
 			Add(remoteView);
 			Add(localView);
@@ -148,8 +151,8 @@ namespace JinglePeerconnectionBindingDemo
 			if (client != null)
 			{
 
-				//localVideoTrack?.RemoveRenderer(localView);
-				//remoteVideoTrack?.RemoveRenderer(remoteView);
+				localVideoTrack?.RemoveRenderer(localView);
+				remoteVideoTrack?.RemoveRenderer(remoteView);
 				localVideoTrack = null;
 				localView.RenderFrame(null);
 				RemoteDisconnected();
@@ -157,7 +160,7 @@ namespace JinglePeerconnectionBindingDemo
 			}
 		}
 
-		internal void RemoteDisconnected()
+		void RemoteDisconnected()
 		{
 			//remoteVideoTrack?.RemoveRenderer(remoteView);
 			remoteVideoTrack = null;
@@ -166,7 +169,7 @@ namespace JinglePeerconnectionBindingDemo
 			//[self videoView:self.localView didChangeVideoSize:self.localVideoSize];   
 		}
 
-		internal void LocalClear()
+		void LocalClear()
 		{
 			//localVideoTrack?.RemoveRenderer(_controller.localView);
 			localVideoTrack = null;
@@ -239,16 +242,6 @@ namespace JinglePeerconnectionBindingDemo
 			client?.Disconnect();
 			NavigationController.PopToRootViewController(true);
 		}
-	}
-
-	class CustomARDAppClientDelegate : ARDAppClientDelegate
-	{
-		ARTCVideoChatViewController _controller;
-
-		public CustomARDAppClientDelegate(ARTCVideoChatViewController controller)
-		{
-			_controller = controller;
-		}
 
 		public void DidChangeState(IARDAppClient client, ARDAppClientState state)
 		{
@@ -262,32 +255,24 @@ namespace JinglePeerconnectionBindingDemo
 					Console.WriteLine("Client connecting");
 					break;
 				case ARDAppClientState.Disconnected:
-					_controller.RemoteDisconnected();
+					RemoteDisconnected();
 					Console.WriteLine("Client disconnected");
 					break;
 				default:
 					break;
 			}
-
-		}
-
-		public void DidError(IARDAppClient client, NSError error)
-		{
-			UIAlertView alertView = new UIAlertView("", error.ToString(), null, "OK", null);
-			alertView.Show();
-			_controller.Disconnect();
 		}
 
 		public void DidReceiveLocalVideoTrack(IARDAppClient client, RTCVideoTrack localVideoTrack)
 		{
-			_controller.LocalClear();
-			_controller.localVideoTrack = localVideoTrack;
-			//	localVideoTrack.AddRenderer(_controller.localView);
+			LocalClear();
+			this.localVideoTrack = localVideoTrack;
+			localVideoTrack.AddRenderer(localView);
 		}
 
 		public void DidReceiveRemoteVideoTrack(IARDAppClient client, RTCVideoTrack remoteVideoTrack)
 		{
-			_controller.remoteVideoTrack = remoteVideoTrack;
+			remoteVideoTrack = remoteVideoTrack;
 			//_controller.remoteVideoTrack.AddRenderer(_controller.remoteView);
 
 			//[UIView animateWithDuration:0.4f animations:^{
@@ -308,9 +293,16 @@ namespace JinglePeerconnectionBindingDemo
 			//    [self.footerViewBottomConstraint setConstant:-80.0f];
 			//    [self.view layoutIfNeeded];
 			//}];
+		}
 
+		public void DidError(IARDAppClient client, NSError error)
+		{
+			UIAlertView alertView = new UIAlertView("", error.ToString(), null, "OK", null);
+			alertView.Show();
+			Disconnect();
 		}
 	}
+
 
 	class CustomRTCEAGLVideoViewDelegate : RTCEAGLVideoViewDelegate
 	{
