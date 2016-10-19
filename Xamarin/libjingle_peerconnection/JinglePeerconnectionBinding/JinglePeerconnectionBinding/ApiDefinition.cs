@@ -167,11 +167,11 @@ namespace JinglePeerconnectionBinding
 
 		// -(void)addRenderer:(id<RTCVideoRenderer>)renderer;
 		[Export("addRenderer:")]
-		void AddRenderer(RTCVideoRenderer renderer);
+		void AddRenderer(IRTCVideoRenderer renderer);
 
 		// -(void)removeRenderer:(id<RTCVideoRenderer>)renderer;
 		[Export("removeRenderer:")]
-		void RemoveRenderer(RTCVideoRenderer renderer);
+		void RemoveRenderer(IRTCVideoRenderer renderer);
 	}
 
 
@@ -582,22 +582,6 @@ namespace JinglePeerconnectionBinding
 		RTCVideoCapturer CapturerWithDeviceName(string deviceName);
 	}
 
-	// @protocol RTCVideoRenderer <NSObject>
-	[Model]
-	[BaseType(typeof(NSObject))]
-	interface RTCVideoRenderer
-	{
-		// @required -(void)setSize:(CGSize)size;
-		[Abstract]
-		[Export("setSize:")]
-		void SetSize(CGSize size);
-
-		// @required -(void)renderFrame:(RTCI420Frame *)frame;
-		[Abstract]
-		[Export("renderFrame:")]
-		void RenderFrame(RTCI420Frame frame);
-	}
-
 	// @interface RTCI420Frame : NSObject
 	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
@@ -665,9 +649,27 @@ namespace JinglePeerconnectionBinding
 	}
 
 
+	// @protocol RTCVideoRenderer <NSObject>
+	//[BaseType(typeof(NSObject))]
+	[Protocol]
+	interface RTCVideoRenderer
+	{
+		// @required -(void)setSize:(CGSize)size;
+		[Abstract]
+		[Export("setSize:")]
+		void SetSize(CGSize size);
+
+		// @required -(void)renderFrame:(RTCI420Frame *)frame;
+		[Abstract]
+		[Export("renderFrame:")]
+		void RenderFrame(RTCI420Frame frame);
+	}
+
+	interface IRTCVideoRenderer { }
+
 	// @interface RTCEAGLVideoView : UIView <RTCVideoRenderer>
 	[BaseType(typeof(UIView))]
-	interface RTCEAGLVideoView : RTCVideoRenderer
+	interface RTCEAGLVideoView : IRTCVideoRenderer
 	{
 		[Export("initWithFrame:")]
 		IntPtr Constructor(CGRect frame);
@@ -678,7 +680,7 @@ namespace JinglePeerconnectionBinding
 		// @property (nonatomic, weak) id<RTCEAGLVideoViewDelegate> delegate;
 		[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
 		NSObject WeakDelegate { get; set; }
-	}
 
+	}
 
 }
