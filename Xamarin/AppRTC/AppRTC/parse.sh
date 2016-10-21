@@ -1,5 +1,4 @@
 sharpie bind -o ../sharpie -sdk iphoneos10.0 \
-AppRTC/*.h \
 ExtraLibs/libjingle_peerconnection/Headers/RTCPeerConnection.h \
 ExtraLibs/libjingle_peerconnection/Headers/RTCPeerConnectionDelegate.h \
 ExtraLibs/libjingle_peerconnection/Headers/RTCPeerConnectionFactory.h \
@@ -14,4 +13,6 @@ ExtraLibs/libjingle_peerconnection/Headers/RTCVideoCapturer.h \
 ExtraLibs/libjingle_peerconnection/Headers/RTCVideoRenderer.h \
 ExtraLibs/libjingle_peerconnection/Headers/RTCI420Frame.h \
 ExtraLibs/libjingle_peerconnection/Headers/RTCEAGLVideoView.h \
+ExtraLibs/libjingle_peerconnection/Headers/RTCICEServer.h \
+ExtraLibs/libjingle_peerconnection/Headers/RTCPair.h \
 -c -IExtraLibs/libjingle_peerconnection/Headers/
