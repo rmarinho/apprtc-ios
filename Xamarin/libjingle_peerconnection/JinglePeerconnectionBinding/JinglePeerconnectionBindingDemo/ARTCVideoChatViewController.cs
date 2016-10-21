@@ -69,7 +69,6 @@ namespace JinglePeerconnectionBindingDemo
 			remoteView.Delegate = _rtcvideoDeleagate;
 			localView.Delegate = _rtcvideoDeleagate;
 
-
 			base.ViewDidLoad();
 		}
 
@@ -87,7 +86,6 @@ namespace JinglePeerconnectionBindingDemo
 			// [self.footerViewBottomConstraint setConstant:0.0f];
 
 			// //Connect to the room
-			// [self disconnect];
 			Disconnect();
 			client = new ARDAppClient(this);
 			client.SetServerHostUrl(SERVER_HOST_URL);
@@ -162,7 +160,7 @@ namespace JinglePeerconnectionBindingDemo
 
 		void RemoteDisconnected()
 		{
-			//remoteVideoTrack?.RemoveRenderer(remoteView);
+			remoteVideoTrack?.RemoveRenderer(remoteView);
 			remoteVideoTrack = null;
 			remoteView.RenderFrame(null);
 
@@ -171,7 +169,7 @@ namespace JinglePeerconnectionBindingDemo
 
 		void LocalClear()
 		{
-			//localVideoTrack?.RemoveRenderer(_controller.localView);
+			localVideoTrack?.RemoveRenderer(localView);
 			localVideoTrack = null;
 			localView.RenderFrame(null);
 		}
@@ -272,8 +270,8 @@ namespace JinglePeerconnectionBindingDemo
 
 		public void DidReceiveRemoteVideoTrack(IARDAppClient client, RTCVideoTrack remoteVideoTrack)
 		{
-			remoteVideoTrack = remoteVideoTrack;
-			//_controller.remoteVideoTrack.AddRenderer(_controller.remoteView);
+			this.remoteVideoTrack = remoteVideoTrack;
+			this.remoteVideoTrack.AddRenderer(remoteView);
 
 			//[UIView animateWithDuration:0.4f animations:^{
 			//    //Instead of using 0.4 of screen size, we re-calculate the local view and keep our aspect ratio
