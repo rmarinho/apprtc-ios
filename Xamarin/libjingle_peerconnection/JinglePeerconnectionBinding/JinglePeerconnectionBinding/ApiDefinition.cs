@@ -26,7 +26,7 @@ namespace JinglePeerconnectionBinding
 		// @property (readonly, nonatomic, strong) NSArray * localStreams;
 		[Export("localStreams", ArgumentSemantic.Strong)]
 		//	[Verify(StronglyTypedNSArray)]
-		NSObject[] LocalStreams { get; }
+		RTCMediaStream[] LocalStreams { get; }
 
 		// @property (readonly, assign, nonatomic) RTCSessionDescription * localDescription;
 		[Export("localDescription", ArgumentSemantic.Assign)]
@@ -62,19 +62,19 @@ namespace JinglePeerconnectionBinding
 
 		// -(void)createOfferWithDelegate:(id<RTCSessionDescriptionDelegate>)delegate constraints:(RTCMediaConstraints *)constraints;
 		[Export("createOfferWithDelegate:constraints:")]
-		void CreateOfferWithDelegate(RTCSessionDescriptionDelegate @delegate, RTCMediaConstraints constraints);
+		void CreateOfferWithDelegate(IRTCSessionDescriptionDelegate @delegate, RTCMediaConstraints constraints);
 
 		// -(void)createAnswerWithDelegate:(id<RTCSessionDescriptionDelegate>)delegate constraints:(RTCMediaConstraints *)constraints;
 		[Export("createAnswerWithDelegate:constraints:")]
-		void CreateAnswerWithDelegate(RTCSessionDescriptionDelegate @delegate, RTCMediaConstraints constraints);
+		void CreateAnswerWithDelegate(IRTCSessionDescriptionDelegate @delegate, RTCMediaConstraints constraints);
 
 		// -(void)setLocalDescriptionWithDelegate:(id<RTCSessionDescriptionDelegate>)delegate sessionDescription:(RTCSessionDescription *)sdp;
 		[Export("setLocalDescriptionWithDelegate:sessionDescription:")]
-		void SetLocalDescriptionWithDelegate(RTCSessionDescriptionDelegate @delegate, RTCSessionDescription sdp);
+		void SetLocalDescriptionWithDelegate(IRTCSessionDescriptionDelegate @delegate, RTCSessionDescription sdp);
 
 		// -(void)setRemoteDescriptionWithDelegate:(id<RTCSessionDescriptionDelegate>)delegate sessionDescription:(RTCSessionDescription *)sdp;
 		[Export("setRemoteDescriptionWithDelegate:sessionDescription:")]
-		void SetRemoteDescriptionWithDelegate(RTCSessionDescriptionDelegate @delegate, RTCSessionDescription sdp);
+		void SetRemoteDescriptionWithDelegate(IRTCSessionDescriptionDelegate @delegate, RTCSessionDescription sdp);
 
 		// -(BOOL)setConfiguration:(RTCConfiguration *)configuration;
 		[Export("setConfiguration:")]
@@ -95,12 +95,13 @@ namespace JinglePeerconnectionBinding
 
 	// @interface RTCMediaConstraints : NSObject
 	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
 	interface RTCMediaConstraints
 	{
 		// -(id)initWithMandatoryConstraints:(NSArray *)mandatory optionalConstraints:(NSArray *)optional;
 		[Export("initWithMandatoryConstraints:optionalConstraints:")]
 		//	[Verify(StronglyTypedNSArray), Verify(StronglyTypedNSArray)]
-		IntPtr Constructor(NSObject[] mandatory, NSObject[] optional);
+		IntPtr Constructor([NullAllowed]NSArray mandatory, [NullAllowed]NSArray optional);
 	}
 	// @protocol RTCMediaStreamTrackDelegate <NSObject>
 	[Model]
@@ -262,12 +263,12 @@ namespace JinglePeerconnectionBinding
 		// @property (readonly, nonatomic, strong) NSArray * audioTracks;
 		[Export("audioTracks", ArgumentSemantic.Strong)]
 		//	[Verify(StronglyTypedNSArray)]
-		NSObject[] AudioTracks { get; }
+		RTCAudioTrack[] AudioTracks { get; }
 
 		// @property (readonly, nonatomic, strong) NSArray * videoTracks;
 		[Export("videoTracks", ArgumentSemantic.Strong)]
 		//	[Verify(StronglyTypedNSArray)]
-		NSObject[] VideoTracks { get; }
+		RTCVideoTrack[] VideoTracks { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * label;
 		[Export("label", ArgumentSemantic.Strong)]
@@ -307,7 +308,7 @@ namespace JinglePeerconnectionBinding
 		// -(RTCPeerConnection *)peerConnectionWithICEServers:(NSArray *)servers constraints:(RTCMediaConstraints *)constraints delegate:(id<RTCPeerConnectionDelegate>)delegate;
 		[Export("peerConnectionWithICEServers:constraints:delegate:")]
 		//[Verify(StronglyTypedNSArray)]
-		RTCPeerConnection PeerConnectionWithICEServers(NSObject[] servers, RTCMediaConstraints constraints, RTCPeerConnectionDelegate @delegate);
+		RTCPeerConnection PeerConnectionWithICEServers(NSArray servers, RTCMediaConstraints constraints, IRTCPeerConnectionDelegate @delegate);
 
 		// -(RTCPeerConnection *)peerConnectionWithConfiguration:(RTCConfiguration *)configuration constraints:(RTCMediaConstraints *)constraints delegate:(id<RTCPeerConnectionDelegate>)delegate;
 		[Export("peerConnectionWithConfiguration:constraints:delegate:")]
@@ -330,7 +331,7 @@ namespace JinglePeerconnectionBinding
 		RTCAudioTrack AudioTrackWithID(string audioId);
 	}
 	// @protocol RTCPeerConnectionDelegate <NSObject>
-	[Model]
+	[Model, Protocol]
 	[BaseType(typeof(NSObject))]
 	interface RTCPeerConnectionDelegate
 	{
@@ -374,6 +375,8 @@ namespace JinglePeerconnectionBinding
 		[Export("peerConnection:didOpenDataChannel:")]
 		void PeerConnection(RTCPeerConnection peerConnection, RTCDataChannel dataChannel);
 	}
+
+	public interface IRTCPeerConnectionDelegate { }
 
 	// @interface RTCAudioTrack : RTCMediaStreamTrack
 	[BaseType(typeof(RTCMediaStreamTrack))]
@@ -537,7 +540,8 @@ namespace JinglePeerconnectionBinding
 	//}
 
 	// @protocol RTCSessionDescriptionDelegate <NSObject>
-	[Model]
+	public interface IRTCSessionDescriptionDelegate { }
+	[Model, Protocol]
 	[BaseType(typeof(NSObject))]
 	interface RTCSessionDescriptionDelegate
 	{
@@ -681,6 +685,48 @@ namespace JinglePeerconnectionBinding
 		[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
 		NSObject WeakDelegate { get; set; }
 
+	}
+
+
+	// @interface RTCICEServer : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface RTCICEServer
+	{
+		// @property (readonly, nonatomic, strong) NSURL * URI;
+		[Export("URI", ArgumentSemantic.Strong)]
+		NSUrl URI { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * username;
+		[Export("username")]
+		string Username { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * password;
+		[Export("password")]
+		string Password { get; }
+
+		// -(id)initWithURI:(NSURL *)URI username:(NSString *)username password:(NSString *)password;
+		[Export("initWithURI:username:password:")]
+		IntPtr Constructor(NSUrl URI, string username, string password);
+	}
+
+
+	// @interface RTCPair : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface RTCPair
+	{
+		// @property (readonly, nonatomic, strong) NSString * key;
+		[Export("key", ArgumentSemantic.Strong)]
+		string Key { get; }
+
+		// @property (readonly, nonatomic, strong) NSString * value;
+		[Export("value", ArgumentSemantic.Strong)]
+		string Value { get; }
+
+		// -(id)initWithKey:(NSString *)key value:(NSString *)value;
+		[Export("initWithKey:value:")]
+		IntPtr Constructor(string key, string value);
 	}
 
 }
