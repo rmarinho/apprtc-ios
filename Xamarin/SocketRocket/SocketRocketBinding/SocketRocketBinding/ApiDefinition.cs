@@ -11,16 +11,16 @@ namespace SocketRocketBinding
 
 	//	[Static]
 	//	[Verify(ConstantsInterfaceAssociation)]
-	partial interface Constants
-	{
-		// extern NSString *const SRWebSocketErrorDomain;
-		[Field("SRWebSocketErrorDomain", "__Internal")]
-		NSString SRWebSocketErrorDomain { get; }
+	//partial interface Constants
+	//{
+	//	// extern NSString *const SRWebSocketErrorDomain;
+	//	[Field("SRWebSocketErrorDomain", "__Internal")]
+	//	NSString SRWebSocketErrorDomain { get; }
 
-		// extern NSString *const SRHTTPResponseErrorKey;
-		[Field("SRHTTPResponseErrorKey", "__Internal")]
-		NSString SRHTTPResponseErrorKey { get; }
-	}
+	//	// extern NSString *const SRHTTPResponseErrorKey;
+	//	[Field("SRHTTPResponseErrorKey", "__Internal")]
+	//	NSString SRHTTPResponseErrorKey { get; }
+	//}
 
 	// @interface SRWebSocket : NSObject <NSStreamDelegate>
 	[BaseType(typeof(NSObject))]
@@ -122,7 +122,7 @@ namespace SocketRocketBinding
 
 	// @protocol SRWebSocketDelegate <NSObject>
 	[BaseType(typeof(NSObject))]
-	[Model]
+	[Model, Protocol]
 	interface SRWebSocketDelegate
 	{
 		// @required -(void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message;
@@ -150,6 +150,9 @@ namespace SocketRocketBinding
 		[Export("webSocketShouldConvertTextFrameToString:")]
 		bool WebSocketShouldConvertTextFrameToString(SRWebSocket webSocket);
 	}
+
+	//public interface ISRWebSocketDelegate
+	//{ }
 
 	// @interface SRCertificateAdditions (NSURLRequest)
 	//[Category]
