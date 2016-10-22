@@ -312,7 +312,7 @@ namespace JinglePeerconnectionBinding
 
 		// -(RTCPeerConnection *)peerConnectionWithConfiguration:(RTCConfiguration *)configuration constraints:(RTCMediaConstraints *)constraints delegate:(id<RTCPeerConnectionDelegate>)delegate;
 		[Export("peerConnectionWithConfiguration:constraints:delegate:")]
-		RTCPeerConnection PeerConnectionWithConfiguration(RTCConfiguration configuration, RTCMediaConstraints constraints, RTCPeerConnectionDelegate @delegate);
+		RTCPeerConnection PeerConnectionWithConfiguration(RTCConfiguration configuration, RTCMediaConstraints constraints, IRTCPeerConnectionDelegate @delegate);
 
 		// -(RTCMediaStream *)mediaStreamWithLabel:(NSString *)label;
 		[Export("mediaStreamWithLabel:")]
@@ -330,8 +330,9 @@ namespace JinglePeerconnectionBinding
 		[Export("audioTrackWithID:")]
 		RTCAudioTrack AudioTrackWithID(string audioId);
 	}
+	public interface IRTCPeerConnectionDelegate { }
 	// @protocol RTCPeerConnectionDelegate <NSObject>
-	[Model, Protocol]
+	[Protocol]
 	[BaseType(typeof(NSObject))]
 	interface RTCPeerConnectionDelegate
 	{
@@ -376,7 +377,7 @@ namespace JinglePeerconnectionBinding
 		void PeerConnection(RTCPeerConnection peerConnection, RTCDataChannel dataChannel);
 	}
 
-	public interface IRTCPeerConnectionDelegate { }
+	//public interface IRTCPeerConnectionDelegate { }
 
 	// @interface RTCAudioTrack : RTCMediaStreamTrack
 	[BaseType(typeof(RTCMediaStreamTrack))]
