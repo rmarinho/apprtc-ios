@@ -36,7 +36,7 @@ namespace JinglePeerconnectionBindingDemo
 		string _webSocketURL;
 		string _webSocketRestURL;
 		NSMutableArray _iceServers;
-		NSMutableArray _messageQueue;
+		List<ARDSignalingMessage> _messageQueue;
 
 		ARDWebSocketChannel _channel;
 		RTCPeerConnection _peerConnection;
@@ -58,7 +58,10 @@ namespace JinglePeerconnectionBindingDemo
 			_delegate = ardpAppDelegate;
 			_serverHostUrl = kARDRoomServerHostUrl;
 			_iceServers = new NSMutableArray();
+			_iceServers.Add(DefaultSTUNServer());
 			_factory = new RTCPeerConnectionFactory();
+			_messageQueue = new List<ARDSignalingMessage>();
+			_isSpeakerEnabled = true;
 		}
 
 		public async void ConnectToRoomWithId(string roomName)
@@ -92,6 +95,14 @@ namespace JinglePeerconnectionBindingDemo
 			foreach (var msg in response.@params.messages)
 			{
 
+				//if (message.type == kARDSignalingMessageTypeOffer ||
+				//         message.type == kARDSignalingMessageTypeAnswer) {
+				//       strongSelf.hasReceivedSdp = YES;
+				//       [strongSelf.messageQueue insertObject:message atIndex:0];
+				//     } else {
+				//       [strongSelf.messageQueue addObject:message];
+				//     }
+
 			}
 
 			RegisterWithColliderIfReady();
@@ -121,7 +132,7 @@ namespace JinglePeerconnectionBindingDemo
 			_roomId = null;
 			_isInitiator = false;
 			_hasReceivedSdp = false;
-			_messageQueue = new NSMutableArray();
+			_messageQueue = new List<ARDSignalingMessage>();
 			_peerConnection = null;
 			_state = ARDAppClientState.Disconnected;
 		}
@@ -263,17 +274,62 @@ namespace JinglePeerconnectionBindingDemo
 
 		}
 
-		void SendSignalingMessage(ARDSignalingMessage message)
+		async Task SendSignalingMessage(ARDSignalingMessage message)
 		{
 			if (_isInitiator)
-				SendSignalingMessageToRoomServer(message);
+				await SendSignalingMessageToRoomServer(message);
 			else
 				SendSignalingMessageToCollider(message);
 		}
 
-		void SendSignalingMessageToRoomServer(ARDSignalingMessage message)
+		async Task SendSignalingMessageToRoomServer(ARDSignalingMessage message, Action<ARDMessageResponse> completionHandler = null)
 		{
-			throw new NotImplementedException();
+			var jsonData = message.JsonData;
+			string urlString = string.Format(kARDRoomServerMessageFormat, _serverHostUrl, _roomId, _clientId);
+			System.Diagnostics.Debug.WriteLine($"C->RS POST: {jsonData}");
+			var client = new HttpClient { BaseAddress = new Uri(urlString) };
+			ARDMessageResponse responseMessage = null;
+			NSError error = null;
+			try
+			{
+				var response = await client.PostAsync("", new StringContent(jsonData));
+
+				if (!response.IsSuccessStatusCode)
+				{
+					error = RoomServerNetworkError(1);
+					_delegate.DidError(this, error);
+					return;
+				}
+				var responseContent = await response.Content.ReadAsStringAsync();
+				responseMessage = JsonConvert.DeserializeObject<ARDMessageResponse>(responseContent);
+				switch (responseMessage.Type)
+				{
+					case ARDMessageResultType.Success:
+						break;
+					case ARDMessageResultType.Unknown:
+						error = RoomServerNetworkError(kARDAppClientErrorUnknown);
+						break;
+					case ARDMessageResultType.InvalidClient:
+						error = RoomServerNetworkError(kARDAppClientErrorInvalidClient);
+						break;
+					case ARDMessageResultType.InvalidRoom:
+						error = RoomServerNetworkError(kARDAppClientErrorInvalidRoom);
+						break;
+					default:
+						break;
+				}
+			}
+			catch (Exception ex)
+			{
+				error = RoomServerNetworkError(kARDAppClientErrorUnknown, ex.Message);
+			}
+			if (error != null)
+			{
+				_delegate.DidError(this, error);
+
+			}
+			completionHandler?.Invoke(responseMessage);
+
 		}
 
 		void RegisterWithColliderIfReady()
@@ -299,7 +355,21 @@ namespace JinglePeerconnectionBindingDemo
 
 		void WaitForAnswer()
 		{
-			throw new NotImplementedException();
+			DrainMessageQueueIfReady();
+		}
+
+		void DrainMessageQueueIfReady()
+		{
+			if (_peerConnection == null || !_hasReceivedSdp)
+			{
+				return;
+			}
+
+			foreach (var messange in _messageQueue)
+			{
+				ProcessSignalingMessage(messange);
+			}
+			_messageQueue.Clear();
 		}
 
 		async Task<NSArray> RequestTURNServersWithURLAsync(Uri requestURL)
@@ -370,6 +440,7 @@ namespace JinglePeerconnectionBindingDemo
 			return registerResponse;
 		}
 
+		#region Defaults
 		RTCMediaConstraints DefaultMediaStreamConstraints()
 		{
 			return new RTCMediaConstraints(null, null);
@@ -404,8 +475,9 @@ namespace JinglePeerconnectionBindingDemo
 			//                           userInfo:@{  NSLocalizedDescriptionKey: @"Room server network error",
 			return error;
 		}
+		#endregion
 
-		public async void DidChangeState(ARDWebSocketChannelState state)
+		public void DidChangeState(ARDWebSocketChannelState state)
 		{
 			switch (state)
 			{
@@ -422,40 +494,49 @@ namespace JinglePeerconnectionBindingDemo
 			}
 		}
 
-		public void didReceiveMessage(ARDSignalingMessage message)
+		public void DidReceiveMessage(ARDSignalingMessage message)
 		{
-			//throw new NotImplementedException();
+			switch (message.Type)
+			{
+				case ARDSignalingMessageType.Offer:
+				case ARDSignalingMessageType.Answer:
+					_hasReceivedSdp = true;
+					_messageQueue.Insert(0, message);
+					break;
+				case ARDSignalingMessageType.Candidate:
+					_messageQueue.Add(message);
+					break;
+				case ARDSignalingMessageType.Bye:
+					ProcessSignalingMessage(message);
+					break;
+				default:
+					break;
+			}
+			DrainMessageQueueIfReady();
 		}
 
 		void ProcessSignalingMessage(ARDSignalingMessage message)
 		{
-			//  NSParameterAssert(_peerConnection ||
 
-			//	  message.type == kARDSignalingMessageTypeBye);
-			//  switch (message.type) {
-			//    case kARDSignalingMessageTypeOffer:
-			//    case kARDSignalingMessageTypeAnswer: {
-			//      ARDSessionDescriptionMessage* sdpMessage =
-			//		  (ARDSessionDescriptionMessage*)message;
-			//		RTCSessionDescription* description = sdpMessage.sessionDescription;
-			//		[_peerConnection setRemoteDescriptionWithDelegate:self
-
-			//									   sessionDescription:description];
-			//      break;
-			//    }
-			//    case kARDSignalingMessageTypeCandidate: {
-			//      ARDICECandidateMessage* candidateMessage =
-			//		  (ARDICECandidateMessage*)message;
-			//	[_peerConnection addICECandidate:candidateMessage.candidate];
-			//      break;
-			//    }
-			//    case kARDSignalingMessageTypeBye:
-			//      // Other client disconnected.
-			//      // TODO(tkchin): support waiting in room for next client. For now just
-			//      // disconnect.
-			//      [self disconnect];
-			//      break;
-			//  }
+			switch (message.Type)
+			{
+				case ARDSignalingMessageType.Offer:
+				case ARDSignalingMessageType.Answer:
+					ARDSessionDescriptionMessage sdpMessage = message as ARDSessionDescriptionMessage;
+					_peerConnection.SetRemoteDescriptionWithDelegate(this, sdpMessage.Description);
+					break;
+				case ARDSignalingMessageType.Candidate:
+					ARDICECandidateMessage candidateMessage = message as ARDICECandidateMessage;
+					_peerConnection.AddICECandidate(candidateMessage.Candidate);
+					break;
+				case ARDSignalingMessageType.Bye:
+					// Other client disconnected.
+					// TODO(tkchin): support waiting in room for next client. For now just
+					Disconnect();
+					break;
+				default:
+					break;
+			}
 		}
 
 		public void PeerConnection(RTCPeerConnection peerConnection, RTCSignalingState stateChanged)
@@ -509,13 +590,8 @@ namespace JinglePeerconnectionBindingDemo
 
 		public void PeerConnection(RTCPeerConnection peerConnection, RTCICECandidate candidate)
 		{
-			//	 dispatch_async(dispatch_get_main_queue(), ^{
-			//  ARDICECandidateMessage *message =
-			//      [[ARDICECandidateMessage alloc] initWithCandidate:candidate];
-			//  [self sendSignalingMessage:message];
-			//});
 			ARDICECandidateMessage message = new ARDICECandidateMessage(candidate);
-			SendSignalingMessage(message);
+			SendSignalingMessage(message).Wait();
 		}
 
 
@@ -526,19 +602,49 @@ namespace JinglePeerconnectionBindingDemo
 
 		public void DidCreateSessionDescription(RTCPeerConnection peerConnection, RTCSessionDescription sdp, NSError error)
 		{
-
+			// dispatch_async(dispatch_get_main_queue(), 
+			if (error != null)
+			{
+				System.Diagnostics.Debug.WriteLine($"Failed to create session description. Error: {error}");
+				Disconnect();
+				//    NSDictionary *userInfo = @{
+				//      NSLocalizedDescriptionKey: @"Failed to create session description.",
+				//    };
+				//    NSError *sdpError =
+				//        [[NSError alloc] initWithDomain:kARDAppClientErrorDomain
+				//                                   code:kARDAppClientErrorCreateSDP
+				//                               userInfo:userInfo];
+				_delegate.DidError(this, error);
+				return;
+			}
+			_peerConnection.SetLocalDescriptionWithDelegate(this, sdp);
+			ARDSessionDescriptionMessage message = new ARDSessionDescriptionMessage(sdp);
+			SendSignalingMessage(message).Wait();
 		}
+
 
 		public void DidSetSessionDescriptionWithError(RTCPeerConnection peerConnection, NSError error)
 		{
-
-		}
-	}
-
-	public class ARDICECandidateMessage : ARDSignalingMessage
-	{
-		public ARDICECandidateMessage(RTCICECandidate candidate)
-		{
+			// dispatch_async(dispatch_get_main_queue(), 
+			if (error != null)
+			{
+				System.Diagnostics.Debug.WriteLine($"Failed to set session description. Error: {error}");
+				Disconnect();
+				//    NSDictionary *userInfo = @{
+				//      NSLocalizedDescriptionKey: @"Failed to create session description.",
+				//    };
+				//    NSError *sdpError =
+				//        [[NSError alloc] initWithDomain:kARDAppClientErrorDomain
+				//                                   code:kARDAppClientErrorCreateSDP
+				//                               userInfo:userInfo];
+				_delegate.DidError(this, error);
+				return;
+			}
+			if (!_isInitiator && _peerConnection.LocalDescription == null)
+			{
+				RTCMediaConstraints constraints = DefaultAnswerConstraints();
+				_peerConnection.CreateAnswerWithDelegate(this, constraints);
+			}
 
 		}
 	}

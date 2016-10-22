@@ -94,6 +94,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
@@ -134,6 +135,8 @@
     <Compile Include="AppRTC\ARDWebSocketChannel.cs" />
     <Compile Include="AppRTC\ARDSignalingMessage.cs" />
     <Compile Include="AppRTC\IARDWebSocketChannelDelegate.cs" />
+    <Compile Include="AppRTC\ARDMessageResponse.cs" />
+    <Compile Include="AppRTC\SocketResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JinglePeerconnectionBinding\JinglePeerconnectionBinding.csproj">

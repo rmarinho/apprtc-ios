@@ -108,10 +108,12 @@ namespace JinglePeerconnectionBindingDemo
 		void SetupUI()
 		{
 			var width = View.Frame.Width;
+			var height = View.Frame.Height;
 			int y = 0;
-			remoteView = new RTCEAGLVideoView(new CGRect(0, y, width, 100));
+			remoteView = new RTCEAGLVideoView(new CGRect(0, y, width, height));
 			y = y + 100;
 			localView = new RTCEAGLVideoView(new CGRect(0, y, width, 100));
+			localView.Hidden = true;
 			y = y + 200;
 			buttonContainerView = new UIView();
 			buttonContainerView.Frame = new CGRect(0, y, width, 100);
@@ -132,7 +134,7 @@ namespace JinglePeerconnectionBindingDemo
 			buttonContainerView.Add(videoButton);
 			buttonContainerView.Add(hangupButton);
 
-			urlLabel = new UILabel();
+			urlLabel = new UILabel { TextColor = UIColor.White };
 
 			y = y + 100;
 			urlLabel.Frame = new CGRect(0, y, width, 100);

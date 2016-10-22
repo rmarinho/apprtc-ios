@@ -1,5 +1,6 @@
 ﻿using System;
 using Foundation;
+using Newtonsoft.Json;
 using SocketRocketBinding;
 
 namespace JinglePeerconnectionBindingDemo
@@ -26,35 +27,29 @@ namespace JinglePeerconnectionBindingDemo
 		ARDWebSocketChannelState _state;
 
 
-
-		//[Export("webSocket:didReceiveMessage:")]
+		//didReceiveMessage
 		public override void WebSocket(SRWebSocket webSocket, NSObject message)
 		{
 
-			NSString messageString = (NSString)message;
-			NSData messageData = messageString.Encode(NSStringEncoding.UTF8);
-			NSError error = null;
-			var jsonObject = NSJsonSerialization.Deserialize(messageData, 0, out error);
-			//[messageString dataUsingEncoding:NSUTF8StringEncoding];
-			//id jsonObject = [NSJSONSerialization JSONObjectWithData:messageData
-			//                                                options:0
-			//                                                  error:nil];
+			SocketResponse socketResponse;
+			try
+			{
+				socketResponse = JsonConvert.DeserializeObject<SocketResponse>(message.ToString());
+				if (!string.IsNullOrEmpty(socketResponse.error))
+				{
+					System.Diagnostics.Debug.WriteLine($"WSS error: {socketResponse.error}");
+					return;
+				}
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine($"Invalid json  error: {ex.Message}");
+				return;
+			}
 
-			//  NSLog(@"Unexpected message: %@", jsonObject);
-			//  return;
-			//}
-			//NSDictionary *wssMessage = jsonObject;
-			//NSString *errorString = wssMessage[kARDWSSMessageErrorKey];
-			//if (errorString.length) {
-			//  NSLog(@"WSS error: %@", errorString);
-			//  return;
-			//}
-			//NSString *payload = wssMessage[kARDWSSMessagePayloadKey];
-			//ARDSignalingMessage *signalingMessage =
-			//    [ARDSignalingMessage messageFromJSONString:payload];
-			//NSLog(@"WSS->C: %@", payload);
-
-			//[_delegate channel:self didReceiveMessage:signalingMessage];
+			System.Diagnostics.Debug.WriteLine(@"WSS->C: %@", socketResponse.msg);
+			ARDSignalingMessage signalingMessage = ARDSignalingMessageExtensions.MessageFromJSONString(socketResponse.msg);
+			_delegate.DidReceiveMessage(signalingMessage);
 		}
 
 		public override void WebSocketDidOpen(SRWebSocket webSocket)
